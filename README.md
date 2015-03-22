@@ -22,6 +22,7 @@ for (var i = 0; i < 1000000000; i++) {
   Math.random();
 } 
 took('My for loop');
+
 // Will log: My for loop took 00:00.531
 ```
 
@@ -57,6 +58,7 @@ setTimeout(function() {
 		console.log('Done');
 	})
 }, 1000);
+
 // Will log: My timeout took 00:01.001
 ```
 
