@@ -8,6 +8,8 @@
 
 ### One liner callback timing
 ```javascript
+var took = require('took');
+
 fs.readFile('/etc/passwd', took('Reading /etc/passwd', function (err, data) {
   // Do something with the data
 }));
@@ -17,22 +19,27 @@ fs.readFile('/etc/passwd', took('Reading /etc/passwd', function (err, data) {
 
 ### To time synchronous code, call took twice with the same id
 ```javascript   
-took('My for loop');
-for (var i = 0; i < 1000000000; i++) {
+var took = require('took');
+
+took('My slow for loop');
+for (var i = 0; i < 300000000; i++) {
   Math.random();
 } 
-took('My for loop');
+took('My slow for loop');
 
-// Will log: My for loop took 00:00.531
+// Will log: My slow for loop took 00:02.636
 ```
 
 ### Use took.tick to find out how much time your code took per iteration
 ```javascript
+var took = require('took');
+
 function slowlyAddTillTen(callback) {
 	var count = 0;
 	function addOne() {
 		if (count++ < 10) {
-			setTimeout(took.tick('Adding', add), Math.random() * 100);
+			console.log(count);
+			setTimeout(took.tick('Adding', addOne), Math.random() * 1000);
 		} else {
 			callback('Done counting');
 		}
@@ -44,11 +51,13 @@ slowlyAddTillTen(took('Adding', function(message) {
 	console.log(message) // 'Done counting'
 }));
 
-// Will log: Adding took 00:01.039. On average 00:00.103 for 10 iterations at 9.62 per second.
+// Will log: Adding took 00:04.301. On average 00:00.430 for 10 iterations at 2.33 per second.
 ```
 
 ### Have the timer wait until the function has been called
 ```javascript
+var took = require('took');
+
 var toCall = took.whenCalled('My time-out', function(callback) {
   setTimeout(callback, 1000);
 });
