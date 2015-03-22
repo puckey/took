@@ -6,7 +6,7 @@
 
     $ npm install took
 
-### One liner callback timing:
+### One liner callback timing
 ```javascript
 fs.readFile('/etc/passwd', took('Reading /etc/passwd', function (err, data) {
   // Do something with the data
