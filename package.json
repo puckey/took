@@ -1,0 +1,20 @@
+{
+  "name": "took",
+  "version": "0.0.1",
+  "description": "Easily log how long your function took to call back: wrap it in a took!",
+  "main": "took.js",
+  "keywords": [
+    "timer",
+    "timing",
+    "log",
+    "logging",
+    "callback",
+    "iteration",
+    "fps"
+  ],
+  "author": "Jonathan Puckey (Moniker)",
+  "license": "MIT",
+  "dependencies": {
+    "pad-number": "0.0.1"
+  }
+}
